@@ -78,6 +78,11 @@ public class XlsBean {
      */
     private String comments;
 
+    public XlsBean() {
+        this.number = "";
+        this.responseAssertion = "";
+    }
+
     /**
      * Convert parameters of String to List of NameValuePair
      *

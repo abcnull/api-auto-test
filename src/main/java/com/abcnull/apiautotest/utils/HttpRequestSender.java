@@ -107,13 +107,14 @@ public class HttpRequestSender {
      * Call this function to send GET/POST request according to 2 fields propertiesBean and xlsMap
      */
     public void send() {
+        log.info("=== 开始发送 Excel 中的请求... ===");
         /* ========== Traverse sheet ========== */
         xlsMap.forEach((sheet, requestList) -> {
             /* ========== Traverse row request ========== */
             requestList.forEach((request) -> {
                 /* check number and enable fields to decide whether continue or not */
-                if(request.getNumber() == null || !request.getEnable().equalsIgnoreCase("y")){
-                    log.warn("Warning:Number 为空或者是否执行没有标记为 Y！跳过此行请求！");
+                if(request.getNumber() == null || request.getNumber().equals("") || !request.getEnable().equalsIgnoreCase("y")){
+                    log.warn("═┄ WARNING:No Number Not Allowed Or Enable Not \"Y\",Skip This Request");
                     return;
                 }
                 /* init 4 params that uri need */
@@ -140,7 +141,7 @@ public class HttpRequestSender {
                         ip = propertiesBean.getIp();
                     } else {
                         // only allowed to throw Unchecked Exception for the bug of lambda expression,:(
-                        log.error("Error:number 为 " + request.getNumber() + " 的请求 IP 为空是不被允许的！跳过此行请求！");
+                        log.error("═┄ ERROR:No." + request.getNumber() + " [" + request.getMethod() + "] No IP Not Allowed!Skip This Request");
                         return;
                     }
                 }
@@ -161,9 +162,7 @@ public class HttpRequestSender {
                     if (propertiesBean.getPath() != null && !propertiesBean.getPath().equals("")) {
                         path = propertiesBean.getPath();
                     } else {
-                        // only allowed to throw Unchecked Exception for the bug of lambda expression,:(
-                        log.error("Error:number 为 " + request.getNumber() + " 的请求 path 为空是不被允许的！跳过此行请求！");
-                        return;
+                        path = BaseConstant.DEFAULT_PATH;
                     }
                 }
                 /* init uri */
@@ -179,12 +178,15 @@ public class HttpRequestSender {
                 httpEntity = null;
                 if(request.getMethod().equalsIgnoreCase("GET") || request.getMethod().equals("")){
                     /* ========== Send GET Request ========== */
+                    log.info("┌┄ No." + request.getNumber() + " [" + request.getMethod() +"] READY TO SEND...");
                     // use Get
                     httpGet = new HttpGet(uri);
                     /* set Get request header */
+                    log.info("├┄ Setting Request Header...(read from properties)");
                     httpGet.setHeaders(propertiesBean.getHeadersArray());
                     // execute GET request
                     try {
+                        log.info("├┄ Sending...");
                         closeableHttpResponse = closeableHttpClient.execute(httpGet);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -193,9 +195,11 @@ public class HttpRequestSender {
                 else {
                     if(request.getMethod().equalsIgnoreCase("POST")){
                         /* ========== Send POST Request ========== */
+                        log.info("┌┄ No." + request.getNumber() + " " + request.getMethod() +" SEND...");
                         // use POST
                         httpPost = new HttpPost(uri);
                         /* set POST request header */
+                        log.info("├┄ Setting Request Header...");
                         httpPost.setHeaders(propertiesBean.getHeadersArray());
                         // init parameters
                         String parameters = null;
@@ -203,7 +207,7 @@ public class HttpRequestSender {
                             // if parameters not exist in request row
                             if (propertiesBean.getParameters() == null || propertiesBean.getParameters().equals("")) {
                                 // if parameters not exist in api configuration
-                                log.info("Info:number 为 " + request.getNumber() +" 的请求无参数");
+                                log.warn("├┄ WARNING:No Parameters Found!");
                             }
                             else {
                                 // parameters exist in api configuration
@@ -220,7 +224,7 @@ public class HttpRequestSender {
                             // if contentEncoding not exist in request row
                             if (propertiesBean.getContentEncoding() == null || propertiesBean.getContentEncoding().equals("")) {
                                 // if contentEncoding not exist in api configuration
-                                log.info("Info:number 为 " + request.getNumber() +" 的请求未设置编码方式，默认采用 UTF-8");
+                                log.warn("├┄ WARNING:No ContentEncoding Found!Using Default Encoding UTF-8");
                                 contentEncoding = BaseConstant.DEFAULT_CONTENTENCODING;
                             }
                             else {
@@ -233,22 +237,25 @@ public class HttpRequestSender {
                             contentEncoding = request.getContentEncoding();
                         }
                         // set POST request entity
+                        log.info("├┄ Setting Request Body And ContentEncoding...");
                         StringEntity stringEntity = new StringEntity(parameters, contentEncoding);
                         httpPost.setEntity(stringEntity);
                         // execute POST request
                         try {
+                            log.info("├┄ Sending...");
                             closeableHttpResponse = closeableHttpClient.execute(httpPost);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                     else {
-                        log.warn("Warning:number 为 " + request.getNumber() + " 的请求中请求方式仅支持 GET 和 POST，为空时默认为 GET，暂不支持其他类型请求，或者请求方式填写有误！请检查！跳过此请求！");
+                        log.warn("═┄ WARNING:No." + request.getNumber() + " " + request.getMethod() +" IS NOT SUPPORTED NOW");
                         return;
                     }
                 }
                 /* assert result */
                 try {
+                    log.info("├┄ Receiving...");
                     httpEntity = closeableHttpResponse.getEntity();
                     /**
                      // response status
@@ -257,6 +264,7 @@ public class HttpRequestSender {
                      System.out.println("The length of response entity is " + httpEntity.getContentLength());
                      */
                     // only assert response entity contains responseAssertion or not which is in the Excel
+                    log.info("└┄ Assertion Result:["+ EntityUtils.toString(httpEntity).contains(request.getResponseAssertion()) +"]");
                     assert EntityUtils.toString(httpEntity).contains(request.getResponseAssertion());
                 } catch (IOException e) {
                     e.printStackTrace();

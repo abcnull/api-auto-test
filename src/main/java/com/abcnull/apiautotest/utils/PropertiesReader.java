@@ -1,6 +1,7 @@
 package com.abcnull.apiautotest.utils;
 
 import com.abcnull.apiautotest.constants.BaseConstant;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.util.Properties;
@@ -13,6 +14,7 @@ import java.util.Properties;
  * @version 1.0.0
  * @date 2019/8/2
  */
+@Slf4j
 public class PropertiesReader {
     /**
      * Properties type
@@ -27,6 +29,7 @@ public class PropertiesReader {
      * @throws IOException throws at InputStream and InputStreamReader
      */
     synchronized public static Properties readProperties(String propertiesPath) throws IOException {
+        log.info("Read properties...");
         // byte input stream
         InputStream inputStream = new FileInputStream(propertiesPath);
         // character input stream

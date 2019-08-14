@@ -1,6 +1,7 @@
 package com.abcnull.apiautotest.bases;
 
 import com.abcnull.apiautotest.beans.PropertiesBean;
+import com.abcnull.apiautotest.constants.BaseConstant;
 import com.abcnull.apiautotest.utils.PropertiesReader;
 import lombok.Data;
 
@@ -37,8 +38,8 @@ public class BaseProperties {
      *
      * @param apiConfig the name of the api configuration file
      */
-    public BaseProperties(String apiConfig) throws IOException {
-        init(apiConfig);
+    public BaseProperties(String apiConfig, String period) throws IOException {
+        init(apiConfig, period);
     }
 
     /**
@@ -46,11 +47,13 @@ public class BaseProperties {
      *
      * @throws IOException read operation of PropertiesReader
      */
-    private void init(String apiConfig) throws IOException {
+    private void init(String apiConfig, String period) throws IOException {
         // the name of api configuration file
         this.apiConfig = apiConfig;
         // the path of the file named apiConfig
-        this.apiConfigPath = Paths.get(System.getProperty("user.dir"), apiConfig).toString();
+        this.apiConfigPath = Paths.get("src/test/resources/apiconfigs/" + period, apiConfig).toString();
+        // init PropertiesBean
+        this.propertiesBean = new PropertiesBean();
         /* ========== read and get values of properties need to be in a synchronized code block ========== */
         synchronized (this){
             // save config data in an util of PropertiesReader

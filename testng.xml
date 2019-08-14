@@ -9,8 +9,8 @@
             <!-- Simple Controller -->
             <class name="com.abcnull.apiautotest.cases.ApiTest">
                 <parameter name="apiConfigName" value="orderservice.properties"></parameter>
-                <parameter name="excelName" value="order.xls"></parameter>
-                <parameter name="sheetName" value="Sheet1"></parameter>
+                <parameter name="excelName" value="orderservice.xls"></parameter>
+                <parameter name="sheetName" value="orderservice"></parameter>
                 <methods>
                     <include name="apiTest"></include>
                 </methods>

@@ -1,5 +1,6 @@
 package com.abcnull.apiautotest.bases;
 
+import com.abcnull.apiautotest.constants.BaseConstant;
 import org.testng.annotations.*;
 
 import java.io.IOException;
@@ -87,7 +88,7 @@ public class BaseTest {
         if(isPropertiesInTestPlan){
             /* ========== Read properties file in TestPlan ========== */
             // read all data in BaseProperties
-            basePropertiesInTestPlan = new BaseProperties(apiConfigName);
+            basePropertiesInTestPlan = new BaseProperties(apiConfigName, BaseConstant.PERIOD_TESTPLAN);
         }
     }
     /**
@@ -117,7 +118,7 @@ public class BaseTest {
         if(isPropertiesInThreadGroup){
             /* ========== Read properties file in ThreadGroup ========== */
             // read all data in BaseProperties
-            basePropertiesInThreadGroup = new BaseProperties(apiConfigName);
+            basePropertiesInThreadGroup = new BaseProperties(apiConfigName, BaseConstant.PERIOD_THREADGROUP);
         }
     }
     /**
@@ -177,7 +178,7 @@ public class BaseTest {
         if(isPropertiesInSimpleController){
             /* ========== Read properties file in SimpleController ========== */
             // read all data in BaseProperties
-            basePropertiesInSimpleController = new BaseProperties(apiConfigName);
+            basePropertiesInSimpleController = new BaseProperties(apiConfigName, BaseConstant.PERIOD_SIMPLECONTROLLER);
         }
         /* ========== Read Excel data ========== */
         if(sheetName.equals("")) {

@@ -1,6 +1,7 @@
 package com.abcnull.apiautotest.utils;
 
 import com.abcnull.apiautotest.beans.XlsBean;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,6 +21,7 @@ import java.util.*;
  * @version 1.0.0
  * @date 2019/8/5
  */
+@Slf4j
 public class XlsReader {
     /**
      * XlsMap
@@ -38,6 +40,7 @@ public class XlsReader {
      * @throws Exception IOException IntrospectionException InvocationTargetException IllegalAccessException
      */
     synchronized public static Map<String, List<XlsBean>> readXls(String xlsPath, String sheetName) throws Exception {
+        log.info("Read Xls...");
         // create xlsFile
         File xlsFile = new File(xlsPath);
         // create workbook according to xlsFile
@@ -47,15 +50,15 @@ public class XlsReader {
         // an ArrayList used for saving all rows data
         List<XlsBean> xlsList = new ArrayList<>();
         /* ========== Traverse every rows of specified sheet of Excel and add it to xlsList ========== */
-        for(int i = 0; i < sheet.getPhysicalNumberOfRows(); i++){
+        for(int i = 1; i < sheet.getPhysicalNumberOfRows(); i++){
             // a row
             Row row = sheet.getRow(i);
             // convert a XlsBean to an Object
-            Object xlsObject = new XlsBean();
+            XlsBean xlsBean = new XlsBean();
             // get all fields of XlsBean Class and save them into Field[]
             Field[] fields = XlsBean.class.getDeclaredFields();
             /* ========== Traverse every columns of specified rows of sheet of Excel and add it to XlsBean ========== */
-            for(int j = 0; j < row.getPhysicalNumberOfCells(); j++){
+            for(int j = 0; j < 11; j++){
                 /* ========== Assign values of every column of specified rows to xlsObject through java reflection ========== */
                 // get single Field by Field[] index
                 Field field = fields[j];
@@ -64,10 +67,10 @@ public class XlsReader {
                 // get Method through descriptor above
                 Method method = propertyDescriptor.getWriteMethod();
                 // assign current column data to current Set method of current xlsObject
-                method.invoke(xlsObject, row.getCell(j).toString());
+                method.invoke(xlsBean, row.getCell(j).toString());
             }
             // save current row data correspond to xlsBean in xlsList
-            xlsList.add((XlsBean) xlsObject);
+            xlsList.add(xlsBean);
         }
         // save current sheet data correspond to xlsList in xlsMap
         xlsMap.put(sheetName, xlsList);
@@ -85,6 +88,7 @@ public class XlsReader {
      * @throws Exception IOException IntrospectionException InvocationTargetException IllegalAccessException
      */
     synchronized public static Map<String, List<XlsBean>> readXls(String xlsPath) throws Exception {
+        log.info("Read Xls...");
         // create xlsFile
         File xlsFile = new File(xlsPath);
         // create workbook according to xlsFile

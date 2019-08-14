@@ -9,9 +9,24 @@ package com.abcnull.apiautotest.constants;
  */
 public class BaseConstant {
     /**
-     * current path
+     * current file path
      */
     public static final String CURRENTPATH = "user.dir";
+
+    /**
+     * testplan period
+     */
+    public static final String PERIOD_TESTPLAN = "testplan";
+
+    /**
+     * threadgroup period
+     */
+    public static final String PERIOD_THREADGROUP = "threadgroup";
+
+    /**
+     * simplecontroller period
+     */
+    public static final String PERIOD_SIMPLECONTROLLER = "simplecontroller";
 
     /**
      * default protocol is "http"
@@ -22,6 +37,11 @@ public class BaseConstant {
      * default portNumber is "8080"
      */
     public static final String DEFAULT_PORTNUMBER = "8080";
+
+    /**
+     * default path is "/"
+     */
+    public static final String DEFAULT_PATH = "/";
 
     /**
      * default contentEncoding is "UTF-8"

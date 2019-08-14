@@ -99,7 +99,7 @@ public class BaseXls {
         // the name of excel
         this.excelName = excelName;
         // the path of the file named excelName
-        this.excelPath = Paths.get(System.getProperty(BaseConstant.CURRENTPATH), excelName).toString();
+        this.excelPath = Paths.get("src/test/resources/cases", excelName).toString();
         // the name of sheet in excel
         this.sheetName = sheetName;
         // the xlsBean of xlsList in xlsMap

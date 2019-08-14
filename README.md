@@ -1,5 +1,24 @@
 # api-auto-test
-- test 包中的 resources 中存在 apiconfigs 文件夹，其中包含多个 properties 类型的配置文件，其中主要是保存默认根地址和数据等非必输
-可能有多个该类型文件，表示不同的服务类型，这样可以在testng中加上参变量就可以传到beforetest里头
-- 在 BaseTest 的 @BeforeTest 中要写上读取指定传过来参变量的 properties 文件的数据
-- 先写个大概的代码整体，然后分部移到src中
+- FIRST CREATION IN EARLY AUGUST 2019
+    
+    The code include the overall framework but roughly structured.It also contains many loopholes and unreasonable point
+    
+- AMEND ON 2019/08/14
+
+    The amended parts are as follows:
+    1. add detailed log code,like `log.info`,`log.warn`,`log.error`,etc.
+    2. supplement xls and allow xls add extra column by rewrite loop condition
+    3. modify the way reading the file
+    
+    Now Problems:
+    1. **NonePointerException**: There are some problems about assign column data to XlsBean in the Excel
+    2. etc.
+        
+    To be added below:
+    1. judge header allowed none
+    2. params of get request haven't be dealt with and need judge params of post allowed none or not
+    3. haven't deal with space of the String responseAssertion
+    4. need select a comments between xls and properties to add in log info
+    5. the function of pressure test need be added
+    6. the function of test a serials requests which exist params dependencies
+    7. etc.

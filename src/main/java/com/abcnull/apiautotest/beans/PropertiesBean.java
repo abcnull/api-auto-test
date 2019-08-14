@@ -1,7 +1,6 @@
 package com.abcnull.apiautotest.beans;
 
 import com.google.gson.Gson;
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
@@ -59,7 +58,6 @@ public class PropertiesBean {
     /**
      * Header of Header Manager
      */
-    @NotNull
     private String headers;
 
     /**
