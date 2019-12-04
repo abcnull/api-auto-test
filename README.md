@@ -1,4 +1,6 @@
 # api-auto-test
+**Project completion: 80%**
+**to be continue**
 - FIRST CREATION IN EARLY AUGUST 2019
     
     The code include the overall framework but roughly structured.It also contains many loopholes and unreasonable point
