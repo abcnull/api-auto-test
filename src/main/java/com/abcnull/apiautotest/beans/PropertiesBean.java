@@ -76,6 +76,23 @@ public class PropertiesBean {
     private String password;
 
     /**
+     * PropertiesBean constructor
+     */
+    public PropertiesBean() {
+        this.protocol = "";
+        this.ip = "";
+        this.portNumber = "";
+        this.path = "";
+        this.contentEncoding = "";
+        this.parameters = "";
+        this.comments = "";
+        this.headers = "";
+        this.cookies = "";
+        this.username = "";
+        this.password = "";
+    }
+
+    /**
      * Convert parameters of String to List of NameValuePair
      *
      * @return List of NameValuePair

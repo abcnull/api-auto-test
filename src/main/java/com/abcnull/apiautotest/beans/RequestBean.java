@@ -1,25 +1,16 @@
 package com.abcnull.apiautotest.beans;
 
-import com.google.gson.Gson;
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
- * XlsBean stores a row of request info in Excel
+ * RequestBean contains all information of one request
  *
- * @author abcnull
+ * @author lei.shi06@hand-china.com
  * @version 1.0.0
- * @date 2019/8/5
+ * @date 2019/12/19
  */
 @Data
-public class XlsBean {
+public class RequestBean {
     /**
      * Number of HTTP Request
      */
@@ -77,9 +68,29 @@ public class XlsBean {
     private String comments;
 
     /**
-     * XlsBean Constructor
+     * Header of Header Manager
      */
-    public XlsBean() {
+    private String headers;
+
+    /**
+     * Cookie of Cookie Manager
+     */
+    private String cookies;
+
+    /**
+     * Username of Authorization Manager
+     */
+    private String username;
+
+    /**
+     * Password of Authorization Manager
+     */
+    private String password;
+
+    /**
+     * RequestBean Constructor
+     */
+    public RequestBean() {
         this.number = "";
         this.enable = "";
         this.protocol = "";
@@ -91,27 +102,9 @@ public class XlsBean {
         this.parameters = "";
         this.responseAssertion = "";
         this.comments = "";
-    }
-
-    /**
-     * Convert parameters of String to List of NameValuePair
-     *
-     * @return List of NameValuePair
-     */
-    public List<NameValuePair> getParametersList(){
-        /* convert json string to map using gson */
-        // gson
-        Gson gson = new Gson();
-        // hashMap
-        Map<String, Object> map = new HashMap<>();
-        // begin converting...
-        map = gson.fromJson(parameters, map.getClass());
-        // list
-        List<NameValuePair> list = new ArrayList<>();
-        // traverse map and fill map data in List<NameValuePair>
-        map.forEach((str, obj) ->
-                list.add(new BasicNameValuePair(str, (String)obj))
-        );
-        return list;
+        this.headers = "";
+        this.cookies = "";
+        this.username = "";
+        this.password = "";
     }
 }
