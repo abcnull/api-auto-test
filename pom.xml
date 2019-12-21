@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
         <!-- Jun, 2019, JUnit 5 -->
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
@@ -28,11 +34,21 @@
         </dependency>
 
         <!-- Jun, 2019, httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.9</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.11</version>
         </dependency>
 
         <!-- Apr, 2018, testng -->
@@ -60,7 +76,7 @@
             <version>4.1.0</version>
         </dependency>
 
-        <!-- May, 2019，lombok -->
+        <!-- May, 2019, lombok -->
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -69,12 +85,50 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jan, 2019, jaxb-impl -->
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <!--slf4j与log4j2的桥接包log4j-slf4j-impl,作用是使用slf4j的api，但是底层实现是基于log4j2-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.11.1</version>
+        </dependency>
         <!-- Feb, 2019, slf4j-api -->
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.26</version>
+            <version>1.7.25</version>
+        </dependency>
+        <!-- Feb, 2019, slf4j-nop -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,18 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <!-- Test Plan -->
 <suite name="API_AUTO_TEST" verbose="1" preserve-order="true" parallel="false">
-    <parameter name="apiConfigName" value="orderservice.properties"></parameter>
+    <parameter name="apiConfigName_Plan" value="orderservice.properties"/>
     <!-- Thread Group -->
-    <test name="自动化测试用例">
-        <parameter name="apiConfigName" value="orderservice.properties"></parameter>
+    <test name="autoTestCase">
+        <parameter name="apiConfigName_Thread" value="orderservice.properties"/>
         <classes>
             <!-- Simple Controller -->
             <class name="com.abcnull.apiautotest.cases.ApiTest">
-                <parameter name="apiConfigName" value="orderservice.properties"></parameter>
-                <parameter name="excelName" value="orderservice.xls"></parameter>
-                <parameter name="sheetName" value="orderservice"></parameter>
+                <parameter name="apiConfigName_Controller" value="orderservice.properties"/>
+                <parameter name="excelName" value="orderservice.xls"/>
+                <parameter name="sheetName" value="orderservice"/>
                 <methods>
-                    <include name="apiTest"></include>
+                    <!-- HTTP Request List -->
+                    <include name="apiTest"/>
                 </methods>
             </class>
         </classes>

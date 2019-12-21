@@ -21,12 +21,8 @@ import java.util.Map;
 public class ApiTest extends BaseTest {
     @Test(description = "apiTest")
     public void apiTest(){
-        // Properties data
-        PropertiesBean propertiesBean = super.baseProperties.getPropertiesBean();
-        // Excel data
-        Map<String, List<XlsBean>> xlsMap = super.baseXls.getXlsMap();
         // init http request sender
-        HttpRequestSender httpRequestSender = new HttpRequestSender(propertiesBean, xlsMap);
+        HttpRequestSender httpRequestSender = new HttpRequestSender(super.propertiesBean, super.xlsMap);
         // send all request
         httpRequestSender.send();
     }

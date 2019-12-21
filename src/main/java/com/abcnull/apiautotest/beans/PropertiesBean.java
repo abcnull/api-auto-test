@@ -102,7 +102,7 @@ public class PropertiesBean {
         // gson
         Gson gson = new Gson();
         // hashMap
-        Map<String, Object> map = new HashMap<> ();
+        Map<String, Object> map = new HashMap<String, Object> ();
         // begin converting...
         map = gson.fromJson(parameters, map.getClass());
         // list
@@ -121,7 +121,7 @@ public class PropertiesBean {
      */
     public Header[] getHeadersArray(){
         // headers array split by char ";"
-        String[] headerArray = headers.replaceAll(" ","").split(";");
+        String[] headerArray = headers.replaceAll(" ","").split("\n");
         // Header[]
         Header[] header = new Header[headerArray.length];
         // fill in Header[]

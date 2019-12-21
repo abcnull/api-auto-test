@@ -2,10 +2,7 @@ package com.abcnull.apiautotest.utils;
 
 import com.abcnull.apiautotest.beans.XlsBean;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -53,21 +50,32 @@ public class XlsReader {
         for(int i = 1; i < sheet.getPhysicalNumberOfRows(); i++){
             // a row
             Row row = sheet.getRow(i);
-            // convert a XlsBean to an Object
+            // create XlsBean to an Object
             XlsBean xlsBean = new XlsBean();
-            // get all fields of XlsBean Class and save them into Field[]
+            // get all fields of XlsBean and save them into Field[]
             Field[] fields = XlsBean.class.getDeclaredFields();
             /* ========== Traverse every columns of specified rows of sheet of Excel and add it to XlsBean ========== */
-            for(int j = 0; j < 11; j++){
+            for(int j = 0; j < 12; j++){
                 /* ========== Assign values of every column of specified rows to xlsObject through java reflection ========== */
                 // get single Field by Field[] index
                 Field field = fields[j];
+                // cell of one column of current row
+                Cell cell = row.getCell(j);
+                // the String of cell data
+                String cellStr = null;
                 // get descriptor of specified Field
                 PropertyDescriptor propertyDescriptor = new PropertyDescriptor(field.getName(), XlsBean.class);
                 // get Method through descriptor above
                 Method method = propertyDescriptor.getWriteMethod();
                 // assign current column data to current Set method of current xlsObject
-                method.invoke(xlsBean, row.getCell(j).toString());
+                if(cell == null){
+                    cellStr = "";
+                }
+                else{
+                    cell.setCellType(CellType.STRING);
+                    cellStr = new DataFormatter().formatCellValue(cell);
+                }
+                method.invoke(xlsBean, cellStr);
             }
             // save current row data correspond to xlsBean in xlsList
             xlsList.add(xlsBean);

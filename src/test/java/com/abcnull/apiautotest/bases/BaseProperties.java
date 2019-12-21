@@ -70,6 +70,7 @@ public class BaseProperties {
             this.propertiesBean.setCookies(PropertiesReader.getValue("cookies"));
             this.propertiesBean.setUsername(PropertiesReader.getValue("username"));
             this.propertiesBean.setPassword(PropertiesReader.getValue("password"));
+            this.propertiesBean.setPassword(PropertiesReader.getValue("a\na"));
         }
     }
 }

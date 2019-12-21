@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_HOME">logs</Property>
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t-%L] %-5level %C.%M - %m%n</property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/demo.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-demo-%i.log">
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="5 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <root level="debug">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFile"/>
+        </root>
+    </Loggers>
+</Configuration>

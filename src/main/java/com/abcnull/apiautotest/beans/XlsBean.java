@@ -3,7 +3,9 @@ package com.abcnull.apiautotest.beans;
 import com.google.gson.Gson;
 import com.sun.istack.internal.NotNull;
 import lombok.Data;
+import org.apache.http.Header;
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
@@ -62,6 +64,11 @@ public class XlsBean {
     private String contentEncoding;
 
     /**
+     * Headers of API Request
+     */
+    private String headers;
+
+    /**
      * Parameters of API Request
      */
     private String parameters;
@@ -88,6 +95,7 @@ public class XlsBean {
         this.method = "";
         this.path = "";
         this.contentEncoding = "";
+        this.headers = "";
         this.parameters = "";
         this.responseAssertion = "";
         this.comments = "";
@@ -113,5 +121,23 @@ public class XlsBean {
                 list.add(new BasicNameValuePair(str, (String)obj))
         );
         return list;
+    }
+
+    /**
+     * Convert headers of String to Header Array
+     *
+     * @return Header[]
+     */
+    public Header[] getHeadersArray(){
+        // headers array split by char ";"
+        String[] headerArray = headers.replaceAll(" ","").split("\n");
+        // Header[]
+        Header[] header = new Header[headerArray.length];
+        // fill in Header[]
+        for (int i = 0; i < headerArray.length; i++) {
+            // key:value split by char ":"
+            header[i] = new BasicHeader(headerArray[i].split(":")[0], headerArray[i].split(":")[1]);
+        }
+        return header;
     }
 }

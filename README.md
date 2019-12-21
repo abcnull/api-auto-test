@@ -9,10 +9,6 @@
     1. add detailed log code,like `log.info`,`log.warn`,`log.error`,etc.
     2. supplement xls and allow xls add extra column by rewrite loop condition
     3. modify the way reading the file
-    
-    Now Problems:
-    1. **NonePointerException**: There are some problems about assign column data to XlsBean in the Excel
-    2. etc.
         
     To be added below:
     1. judge header allowed none
@@ -22,3 +18,10 @@
     5. the function of pressure test need be added
     6. the function of test a serials requests which exist params dependencies
     7. etc.
+    
+- AMEND ON 2019/08/16
+
+    The amended parts are as follows:
+    1. set fields of bean to "",cuz null could cause unexpected problems
+    2. amend if else at `getCell().toString()`,cuz null can't convert to String
+    3. 
