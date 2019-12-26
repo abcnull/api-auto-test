@@ -19,4 +19,10 @@
             </class>
         </classes>
     </test>
+
+    <listeners>
+        <listener class-name="com.abcnull.apiautotest.listeners.RePrioritizingListener"/>
+        <listener class-name="com.abcnull.apiautotest.listeners.TestLogListener"/>
+        <listener class-name="com.abcnull.apiautotest.listeners.TestReportListener"/>
+    </listeners>
 </suite>
