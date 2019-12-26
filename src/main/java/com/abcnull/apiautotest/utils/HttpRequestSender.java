@@ -329,6 +329,13 @@ public class HttpRequestSender {
         });
     }
 
+    /**
+     * For Https
+     *
+     * @param host host
+     * @param path path
+     * @return
+     */
     private static CloseableHttpClient wrapClient(String host,String path) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         if (host != null && host.startsWith("https://")) {
@@ -340,13 +347,12 @@ public class HttpRequestSender {
     }
 
     /**
-     * 在调用SSL之前需要重写验证方法，取消检测SSL
-     * 创建ConnectionManager，添加Connection配置信息
-     * @return HttpClient 支持https
+     * For Https
+     *
+     * @return CloseableHttpClient
      */
     private static CloseableHttpClient sslClient() {
         try {
-            // 在调用SSL之前需要重写验证方法，取消检测SSL
             X509TrustManager trustManager = new X509TrustManager() {
                 @Override public X509Certificate[] getAcceptedIssuers() {
                     return null;
@@ -357,14 +363,14 @@ public class HttpRequestSender {
             SSLContext ctx = SSLContext.getInstance(SSLConnectionSocketFactory.TLS);
             ctx.init(null, new TrustManager[] { trustManager }, null);
             SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(ctx, NoopHostnameVerifier.INSTANCE);
-            // 创建Registry
+            // create Registry
             RequestConfig requestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD_STRICT)
                     .setExpectContinueEnabled(Boolean.TRUE).setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM,AuthSchemes.DIGEST))
                     .setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC)).build();
             Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", PlainConnectionSocketFactory.INSTANCE)
                     .register("https",socketFactory).build();
-            // 创建ConnectionManager，添加Connection配置信息
+            // create ConnectionManager
             PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
             CloseableHttpClient closeableHttpClient = HttpClients.custom().setConnectionManager(connectionManager)
                     .setDefaultRequestConfig(requestConfig).build();

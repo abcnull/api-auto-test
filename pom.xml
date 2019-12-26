@@ -8,7 +8,7 @@
     <artifactId>api-auto-test</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>java+httpclient+testng接口自动化测试</name>
+    <name>java+httpclient+testng api-auto-test</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -104,7 +104,6 @@
             <artifactId>log4j-api</artifactId>
             <version>2.11.1</version>
         </dependency>
-        <!--slf4j与log4j2的桥接包log4j-slf4j-impl,作用是使用slf4j的api，但是底层实现是基于log4j2-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>

@@ -12,6 +12,8 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
+ * For Https
+ *
  * @author lei.shi06@hand-china.com
  * @version 1.0.0
  * @date 2019/12/21
