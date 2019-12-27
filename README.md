@@ -134,7 +134,7 @@ Non-process request test. Until now it does not support cookie, https, and it on
 
 **to be realized**
 
-1. https request now has been identified as http. Although there is a util class about getting https and there is also some method about producing https request method in Base, they dose not work for i have tested. Later i will implement these
+1. Https request now has been identified as http. Although there is a util class about getting https and there is also some method about producing https request method in Base, they dose not work for i have tested. Later i will implement these
 2. Now, this project support get and post. Later it will support more request method
 3. Later, it will support cookie, and excel should also add a new column "cookie"
 4. Now get method does not support parameter passing. It will be supported
