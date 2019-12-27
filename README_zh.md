@@ -1,4 +1,4 @@
-**[English](https://github.com/abcnull/api-auto-test/blob/master/README.md) | [博客](https://blog.csdn.net/abcnull/article/details/103722306)**
+**[English](https://github.com/abcnull/api-auto-test) | [博客](https://blog.csdn.net/abcnull/article/details/103722306)**
 
 [TOC]
 
