@@ -93,7 +93,7 @@ Bean contains properties bean, excel row bean, request information bean
 
 Non-process request test. Until now it does not support cookie, https, and it only support get, post request. Later i will improve the framework constantly
 
-**几点注意**
+**some cautions**
 
 1. Only support post, get not support https and cookie
 2. In three`.properties` file, headers parameter can use `\n` to splite different header, such as `A:a\nB:b` in which it could contain space char and this is allowed because of space char automatically cleared. In excel, more simply, you can copy request headers from Chrome Console and paste them to excel. In excel, one cell can display muti-line headers
